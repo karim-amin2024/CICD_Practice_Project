@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print the Issue Event meta data
-        run: echo "${{github.event}}"
+        run: echo ${{toJSON(github.event)}}
       - name: Print github meta data  
-        run: echo "${{github}}"
+        run: echo ${{toJSON(github)}}
