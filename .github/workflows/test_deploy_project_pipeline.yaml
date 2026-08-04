@@ -14,10 +14,10 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Run Lint on the Project
-        run: npm lint
+        run: npm run lint
 
       - name: Run Test on the Project
-        run: npm test
+        run: npm run test
   
   deploy_job:
     needs: lint_test_job
@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Build the application to deploy
-        run: npm build
+        run: npm run build
 
       - name: Deploy the application on the Production Server
         run: echo "Deploying the application on the Server......."
