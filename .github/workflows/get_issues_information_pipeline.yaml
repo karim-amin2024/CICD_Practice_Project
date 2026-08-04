@@ -1,7 +1,7 @@
 name: Get newly created Issues Meta data
 on: 
   issues:
-  types: [opened]
+    types: [opened]
 jobs:
     Output the Event details:
       runs-on: ubuntu-latest
