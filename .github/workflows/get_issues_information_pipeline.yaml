@@ -3,10 +3,10 @@ on:
   issues:
     types: [opened]
 jobs:
-    Output the Event details:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Print the Issue Event meta data
-          run: echo "${{github.event}}"
-        - name: Print github meta data  
-          run: echo "${{github}}"
+  Output the Event details:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the Issue Event meta data
+        run: echo "${{github.event}}"
+      - name: Print github meta data  
+        run: echo "${{github}}"
