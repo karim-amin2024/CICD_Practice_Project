@@ -8,10 +8,13 @@ jobs:
       - name: setup the needed nodeJs version on the Runner
         uses: actions/setup-node@v7
         with:
-          node-version: '22.22.2'
+          node-version: 'latest'
     
       - name: Checkout the repo on the Runner
         uses: actions/checkout@v7
+
+      - name: Install the Project dependencies 
+        run: npm ci
 
       - name: Run Lint on the Project
         run: npm run lint
@@ -26,11 +29,14 @@ jobs:
       - name: setup the needed nodeJs version on the Runner
         uses: actions/setup-node@v7
         with:
-          node-version: '22.22.2'
+          node-version: 'latest'
       
       - name: Checkout the repo on the Runner
         uses: actions/checkout@v7
 
+      - name: Install the Project dependencies 
+        run: npm ci
+        
       - name: Build the application to deploy
         run: npm run build
 
