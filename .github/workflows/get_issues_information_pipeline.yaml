@@ -4,6 +4,7 @@ on:
     types: [opened]
 jobs:
   Output_the_Event_details:
+    # The Virtual machine Runner that executes the CI Jobs (Test and Deployment environment)
     runs-on: ubuntu-latest
     steps:
       - name: Print the Issue Event meta data

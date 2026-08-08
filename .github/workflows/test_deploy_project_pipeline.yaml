@@ -1,27 +1,30 @@
 name: Test_Deploy
+# This workflow would be triggered when Commit Push happened or manually(using github GUI or github APIs).
 on: [workflow_dispatch,push]
 jobs:
   # Performing the static and dynamic testing togther in one job
   lint_test_job:
     runs-on: ubuntu-latest
     steps:
+      # init the test environment Tools versions
       - name: setup the needed nodeJs version on the Runner
         uses: actions/setup-node@v7
         with:
           node-version: 'latest'
-    
+      # The repo source code doesn't exist by default on the Runner.
+      # it mandatory to checkout the repo to access the source code and even the test cases.
       - name: Checkout the repo on the Runner
         uses: actions/checkout@v7
-
+      # Install all the SW packages which are needed to build and run the application and the test suit
       - name: Install the Project dependencies 
         run: npm ci
-
+      # Run the static anlysis tests on the App
       - name: Run Lint on the Project
         run: npm run lint
-
+      # Run the dynamic test cases on the App
       - name: Run Test on the Project
         run: npm run test
-  
+  # this CI Job would run after this job "lint_test_job" to be executed and finished without any error or failures.
   deploy_job:
     needs: lint_test_job
     runs-on: ubuntu-latest
