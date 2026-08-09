@@ -25,7 +25,13 @@ jobs:
   somke-test:
     if: ${{github.event.label.name == 'smoke-test'}}
     runs-on: ubuntu-latest
-    steps:    
+    steps:   
+      - name: clone the repo under test on the Runner machine
+        uses: actions/checkout@v7
+        
+      - name: setup the dependencies
+        run: npm ci
+
       - name: Run the static analysis test cases.
         run: npm run lint
 
