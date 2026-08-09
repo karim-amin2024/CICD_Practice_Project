@@ -16,6 +16,10 @@ jobs:
         run: npm run build
       - name: uploading the build artifacts on the Jfrog
         run: echo "Uploading the build artifacts on the Jfrog"
+      - name: output the context var. for more info
+        env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: echo "$EVENT_CONTEXT"
 
 
   somke-test:
@@ -27,4 +31,9 @@ jobs:
 
       - name: telling the user that the label is not defined
         run: echo "Label is not defined"
+
+      - name: output the context var. for more info
+        env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: echo "$EVENT_CONTEXT"
       
