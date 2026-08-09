@@ -9,21 +9,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: clone the repo under test on the Runner machine
-        uses: actions/Checkout@v7
-        run: echo "Cloning the repo...."
+        uses: actions/checkout@v7
       - name: setup the dependencies
         run: npm ci
       - name: Build the SW under test
         run: npm run build
       - name: uploading the build artifacts on the Jfrog
         run: echo "Uploading the build artifacts on the Jfrog"
-    if: ${{github.event.label.name == 'smoke-test'}}
+
+
+  somke-test:
+    elif: ${{github.event.label.name == 'smoke-test'}}
     runs-on: ubuntu-latest
-    steps:
-      - name: clone the repo under test on the Runner machine
-        uses: actions/Checkout@v7
-        run: echo "Cloning the repo...."
-      - name: setup the dependencies
-        run: npm ci
+    steps:    
       - name: Run the static analysis test cases.
         run: npm run lint
+        
+      - name: telling the user that the label is not defined
+        run: echo "Label is not defined"
+      

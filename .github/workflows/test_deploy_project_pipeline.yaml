@@ -24,9 +24,9 @@ jobs:
       # Run the dynamic test cases on the App
       - name: Run Test on the Project
         run: npm run test
-  # this CI Job would run after this job "lint_test_job" to be executed and finished without any error or failures.
+  # this CI Job would run after this job "lint_test" to be executed and finished without any error or failures.
   deploy:
-    needs: lint_test_job
+    needs: lint_test
     runs-on: ubuntu-latest
     steps:
       - name: setup the needed nodeJs version on the Runner
