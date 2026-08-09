@@ -1,0 +1,29 @@
+name: Run labeled tests
+on: 
+  pull_request: 
+    types: [labeled]
+
+jobs:
+  build:
+    if: ${{github.event.label.name == 'build'}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone the repo under test on the Runner machine
+        uses: actions/Checkout@v7
+        run: echo "Cloning the repo...."
+      - name: setup the dependencies
+        run: npm ci
+      - name: Build the SW under test
+        run: npm run build
+      - name: uploading the build artifacts on the Jfrog
+        run: echo "Uploading the build artifacts on the Jfrog"
+    if: ${{github.event.label.name == 'smoke-test'}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone the repo under test on the Runner machine
+        uses: actions/Checkout@v7
+        run: echo "Cloning the repo...."
+      - name: setup the dependencies
+        run: npm ci
+      - name: Run the static analysis test cases.
+        run: npm run lint

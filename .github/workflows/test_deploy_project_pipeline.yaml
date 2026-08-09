@@ -3,7 +3,7 @@ name: Test_Deploy
 on: [workflow_dispatch,push]
 jobs:
   # Performing the static and dynamic testing togther in one job
-  lint_test_job:
+  lint_test:
     runs-on: ubuntu-latest
     steps:
       # init the test environment Tools versions
@@ -25,7 +25,7 @@ jobs:
       - name: Run Test on the Project
         run: npm run test
   # this CI Job would run after this job "lint_test_job" to be executed and finished without any error or failures.
-  deploy_job:
+  deploy:
     needs: lint_test_job
     runs-on: ubuntu-latest
     steps:
