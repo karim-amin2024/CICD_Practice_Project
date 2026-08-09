@@ -1,6 +1,8 @@
 name: Run labeled tests
 on: 
+  # first set the name of the event
   pull_request: 
+    # here define the event type.
     types: [labeled]
 
 jobs:
@@ -42,4 +44,20 @@ jobs:
         env:
           EVENT_CONTEXT: ${{ toJSON(github.event) }}
         run: echo "$EVENT_CONTEXT"
+
+  full-test:
+    if: ${{github.event.label.name == 'full-test'}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone the repo under test on the Runner machine
+        uses: actions/checkout@v7
+        
+      - name: setup the dependencies
+        run: npm ci 
+
+      - name: Run the Full Test suit 
+        run: npm run test
+
+      - name: Upload the test result if needed
+        run: echo "uploading results"
       

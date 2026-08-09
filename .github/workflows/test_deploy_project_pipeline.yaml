@@ -1,6 +1,9 @@
 name: Test_Deploy
 # This workflow would be triggered when Commit Push happened or manually(using github GUI or github APIs).
-on: [workflow_dispatch,push]
+on: 
+  push:
+    branches:
+      - 'master'
 jobs:
   # Performing the static and dynamic testing togther in one job
   lint_test:
