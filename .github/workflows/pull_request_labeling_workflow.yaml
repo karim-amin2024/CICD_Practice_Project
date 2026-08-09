@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    if: ${{github.event.label.name == 'build'}}
+    if: contains(github.event.pull_request.labels.*.name, 'build')
     runs-on: ubuntu-latest
     steps:
       - name: clone the repo under test on the Runner machine
@@ -25,7 +25,7 @@ jobs:
 
 
   somke-test:
-    if: ${{github.event.label.name == 'smoke-test'}}
+    if: contains(github.event.pull_request.labels.*.name, 'smoke-test')
     runs-on: ubuntu-latest
     steps:   
       - name: clone the repo under test on the Runner machine
@@ -46,7 +46,7 @@ jobs:
         run: echo "$EVENT_CONTEXT"
 
   full-test:
-    if: ${{github.event.label.name == 'full-test'}}
+    if: contains(github.event.pull_request.labels.*.name, 'full-test')
     runs-on: ubuntu-latest
     steps:
       - name: clone the repo under test on the Runner machine
