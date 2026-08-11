@@ -59,8 +59,9 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build_artifacts
+      - name: list all the folder and files in the current location on the runner
         run: ls
-        
+
       - name: Deploy the application on the Production Server
         run: echo "Deploying the application on the Server......."
 
