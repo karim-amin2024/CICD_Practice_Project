@@ -38,6 +38,10 @@ jobs:
       run: npm ci
     - name: Build the application to deploy
       run: npm run build
+    - name: Upload the job artifacts
+      uses: actions/upload-artifact@v7
+      with:
+        path: dist 
   # this CI Job would run after this job "lint_test" to be executed and finished without any error or failures.
   deploy:
     needs: build
