@@ -37,7 +37,7 @@ jobs:
     - name: Install the Project dependencies 
       run: npm ci
     - name: Build the application to deploy
-        run: npm run build
+      run: npm run build
   # this CI Job would run after this job "lint_test" to be executed and finished without any error or failures.
   deploy:
     needs: build
