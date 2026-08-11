@@ -42,6 +42,8 @@ jobs:
     - name: Upload the job artifacts
       uses: actions/upload-artifact@v7
       with:
+        # we must set an artifact identifier to use it later in the download artifact jobs
+        name: build_artifacts
         path: dist 
   # this CI Job would run after this job "lint_test" to be executed and finished without any error or failures.
   deploy:
@@ -53,6 +55,12 @@ jobs:
         with:
           node-version: 'latest'
 
+      - name: Download the production build artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: build_artifacts
+        run: ls
+        
       - name: Deploy the application on the Production Server
         run: echo "Deploying the application on the Server......."
 
