@@ -30,7 +30,7 @@ jobs:
   build:
     needs: lint_test
     runs-on: ubuntu-latest
-    output:
+    outputs:
       script-file: ${{steps.Publish.outputs.script_file}}
     steps:
     - name: Checkout the repo on the Runner
