@@ -30,6 +30,8 @@ jobs:
   build:
     needs: lint_test
     runs-on: ubuntu-latest
+    output:
+      script-file: ${{steps.Publish.outputs.script_file}}
     steps:
     - name: Checkout the repo on the Runner
       uses: actions/checkout@v7
@@ -45,6 +47,10 @@ jobs:
         # we must set an artifact identifier to use it later in the download artifact jobs
         name: build_artifacts
         path: dist 
+    # Generate the generated file name as a job output
+    - name: Publish the JS generated file name in the build artifacts
+      id: Publish
+      run: find dist/assets/*.js -type f -execdir echo 'script_file={}' >> $GITHUB_OUTPUT ';'
   # this CI Job would run after this job "lint_test" to be executed and finished without any error or failures.
   deploy:
     needs: build
@@ -61,6 +67,8 @@ jobs:
           name: build_artifacts
       - name: list all the folder and files in the current location on the runner
         run: ls
+      - name: output the generated file name by the last job
+        run: echo "the generated file name in the build job is ${{needs.build.outputs.script-file}}"
 
       - name: Deploy the application on the Production Server
         run: echo "Deploying the application on the Server......."
