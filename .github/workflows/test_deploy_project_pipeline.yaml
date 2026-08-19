@@ -23,7 +23,7 @@ jobs:
         uses: threeal/cache-action@v1.0.0
         with:
           key: deps_node_modules_${{hashFiles('**/package-lock.json')}}
-          files: ~/.npm
+          files: node_modules
 
       # Install all the SW packages which are needed to build and run the application and the test suit
       - name: Install the Project dependencies 
