@@ -18,6 +18,13 @@ jobs:
       # it mandatory to checkout the repo to access the source code and even the test cases.
       - name: Checkout the repo on the Runner
         uses: actions/checkout@v7
+
+      - name: Cache dependencies
+        uses: threeal/cache-action@v1.0.0
+        with:
+          key: deps_node_modules_${{hashFiles('**/package-lock.json')}}
+          files: ~/.npm
+
       # Install all the SW packages which are needed to build and run the application and the test suit
       - name: Install the Project dependencies 
         run: npm ci
@@ -35,6 +42,13 @@ jobs:
     steps:
     - name: Checkout the repo on the Runner
       uses: actions/checkout@v7
+      
+    - name: Cache dependencies
+      uses: threeal/cache-action@v1.0.0
+      with:
+        key: deps_node_modules_${{hashFiles('**/package-lock.json')}}
+        files: ~/.npm
+
     # Install all the SW packages which are needed to build and run the application and the test suit
     - name: Install the Project dependencies 
       run: npm ci
@@ -67,10 +81,9 @@ jobs:
           name: build_artifacts
       - name: list all the folder and files in the current location on the runner
         run: ls
+      # this takes the output value from the build job.
       - name: output the generated file name by the last job
         run: echo "the generated file name in the build job is ${{needs.build.outputs.script-file}}"
 
       - name: Deploy the application on the Production Server
         run: echo "Deploying the application on the Server......."
-
-
