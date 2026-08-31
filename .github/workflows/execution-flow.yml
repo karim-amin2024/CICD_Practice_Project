@@ -37,6 +37,8 @@ jobs:
         run: npm run test
       # we only should upload the test report if the Test Code step failed
       - name: Upload test report
+        # failure() => when any pervoius step or job failed.
+        # this is a special function to force the triggering of this step even if the pervoius one failed.
         if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v4
         with:
@@ -76,3 +78,11 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying..."
+
+  report:
+    needs: [deploy,lint]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Information 
+        run: echo "Something went wrong !!"
