@@ -17,7 +17,7 @@ jobs:
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       # skip the installation if there is a chache hit.
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit == 'false'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Lint code
         run: npm run lint
@@ -34,7 +34,7 @@ jobs:
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       # skip the installation if there is a chache hit.
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit == 'false'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Test code
         id: run-tests
@@ -62,7 +62,7 @@ jobs:
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       # skip the installation if there is a chache hit.
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit == 'false'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Build website
         id: build-website
