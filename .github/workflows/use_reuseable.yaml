@@ -6,8 +6,5 @@ on:
 jobs:
   Call_workflow:
     runs-on: ubuntu-latest
-    steps:
-      - name: Get the repo code on the Runner
-        uses: actions/checkout@v7
-      - name: call existing workflow_call 
-        uses: ./.github/workflows/reusable.yaml
+    uses: ./.github/workflows/reusable.yaml 
+        
