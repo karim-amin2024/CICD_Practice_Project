@@ -14,7 +14,7 @@ on:
 jobs:
   Deploy:
     outputs:
-      outcome: ${{steps.set-output.set_output}}
+      outcome: ${{steps.set_output.output}}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy application
@@ -22,5 +22,5 @@ jobs:
       - name: "Print the value of the input parameter"
         run: echo "the input paramter is ${{inputs.artifacts_file_name}}"
       - name: Output the job result
-        id: set-output
-        run: echo "set_output=success" >> $GITHUB_OUTPUT
+        id: set_output
+        run: echo "output=success" >> $GITHUB_OUTPUT

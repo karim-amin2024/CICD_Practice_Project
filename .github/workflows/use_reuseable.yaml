@@ -8,6 +8,8 @@ jobs:
     # a Job that calling another workflow 
     # Mustn't define runs-on & Steps
     uses: ./.github/workflows/reusable.yaml
+    with:
+      artifacts_file_name: "dest_file"
 
   Print_Outputs_of_called_workflow:
     needs: Call_workflow
