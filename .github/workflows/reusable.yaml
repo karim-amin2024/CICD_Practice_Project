@@ -14,7 +14,7 @@ on:
 jobs:
   Deploy:
     outputs:
-      outcome: ${{steps.set_output.output}}
+      outcome: ${{steps.set_output.outputs.output}}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy application
