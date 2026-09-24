@@ -5,5 +5,14 @@ on:
       - master
 jobs:
   Call_workflow:
-    uses: ./.github/workflows/reusable.yaml 
+    # a Job that calling another workflow 
+    # Mustn't define runs-on & Steps
+    uses: ./.github/workflows/reusable.yaml
+
+  Print_Outputs_of_called_workflow:
+    needs: Call_workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the output value
+        run: echo "the output value is ${{needs.Call_workflow.outputs.result}}"
         

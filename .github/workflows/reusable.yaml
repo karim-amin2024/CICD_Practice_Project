@@ -1,8 +1,26 @@
 name: reusable_workflow
-on: workflow_call
+on: 
+  workflow_call:
+    inputs: 
+      artifacts_file_name:
+        description: contains the artifacts generated file name 
+        type: string
+        required: false 
+        default: dest
+    outputs:
+      result:
+        description: contains the result of the deployment job
+        value: ${{jobs.Deploy.outputs.outcome}}
 jobs:
   Deploy:
+    outputs:
+      outcome: ${{steps.set-output.set_output}}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy application
         run: echo "Deploying & uploading files...."
+      - name: "Print the value of the input parameter"
+        run: echo "the input paramter is ${{inputs.artifacts_file_name}}"
+      - name: Output the job result
+        id: set-output
+        run: echo "set_output=success" >> $GITHUB_OUTPUT
