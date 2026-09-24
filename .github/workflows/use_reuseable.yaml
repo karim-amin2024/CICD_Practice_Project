@@ -1,0 +1,11 @@
+name: use_workfolw
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  Call_workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: call existing workflow_call 
+        uses: ./.github/workflows/reusable.yaml

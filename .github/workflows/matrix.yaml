@@ -11,9 +11,11 @@ jobs:
         # specifying different values for keys used in the current job steps
         node-version: [12,14,16]
         operating-system: [ubuntu-latest,windows-latest]
+        # include keyword adds more combinations to an existing matrix 
         include:
           - node-version: 18
             operating-system: ubuntu-latest
+        # exclude keyword removes combinations from an existing matrix
         exclude:
           - node-version: 12
             operating-system: windows-latest
